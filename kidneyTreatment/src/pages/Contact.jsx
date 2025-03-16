@@ -11,27 +11,32 @@
       e.preventDefault();
       setLoading(true);
       setSuccess(false);
-
+    
       const url =
-        "https://script.google.com/macros/s/AKfycbzsQ3h_8_-X6gMncwuwohrLm-z-KdWeMykv_QT0kRLGphxLPErCo1hGyXmz1lcCL1y1/exec"; // Replace with actual URL
-
+        "https://script.google.com/macros/s/AKfycbzsQ3h_8_-X6gMncwuwohrLm-z-KdWeMykv_QT0kRLGphxLPErCo1hGyXmz1lcCL1y1/exec";
+    
       const formData = new URLSearchParams();
       formData.append("Name", e.target.name.value.trim());
       formData.append("Email", e.target.email.value.trim());
-      formData.append("Phone", e.target.phone.value.trim());
-      formData.append("Subject", e.target.subject.value.trim());
-      formData.append("Message", e.target.message.value.trim());
-
+      formData.append("Phone", e.target.phone?.value.trim() || "");
+      formData.append("Subject", e.target.subject?.value.trim() || "");
+      formData.append("Message", e.target.message?.value.trim() || "");
+      formData.append("Feedback", e.target.feedback?.value.trim() || "");
+    
       fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: formData.toString(),
       })
-        .then((res) => res.text())
+        .then((res) => res.json()) // 👈 Convert to JSON
         .then((data) => {
-          alert(data);
-          setSuccess(true);
-          e.target.reset(); // Clear the form
+          if (data.status === "success") {
+            alert(data.message);
+            setSuccess(true);
+            e.target.reset(); // Clear the form
+          } else {
+            alert(`Error: ${data.message}`);
+          }
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -39,6 +44,7 @@
         })
         .finally(() => setLoading(false));
     };
+    
     
 
     // const [selectedClinic, setSelectedClinic] = useState("Renal Care Center");
