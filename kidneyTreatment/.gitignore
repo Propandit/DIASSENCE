@@ -1,4 +1,10 @@
-# Logs
+#
+
+node_modules/
+package-lock.json
+
+
+ #Logs
 logs
 *.log
 npm-debug.log*
@@ -7,9 +13,6 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-
-node_modules/
-package-lock.json
 
 
 node_modules
