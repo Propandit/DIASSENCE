@@ -3,6 +3,9 @@ import doc0 from "/assets/doc1.jpg";
 import sir from "/assets/sir.jpg";
 import mam from "/assets/mam.jpg";
 import { useNavigate } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+
 
 
 
@@ -84,6 +87,7 @@ Diassence Healthcare Pvt. Ltd., established in 2020, is a proactive kidney care 
       </div>
 
 {/* ✅ Corporate Team Section */}
+{/* ✅ Corporate Team Section with Swiper */}
 <div className="max-w-7xl mx-auto mt-14 text-center">
   <h2 className="text-4xl mt-6 sm:text-4xl md:text-5xl font-bold text-gray-800 dark:text-white">
     Meet Our Corporate <br /> Team
@@ -93,46 +97,85 @@ Diassence Healthcare Pvt. Ltd., established in 2020, is a proactive kidney care 
   </p>
 </div>
 
-<div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
-  {mainteam.map((member, index) => (
-    <div key={index} className="p-6 bg-white rounded-lg shadow text-center hover:bg-blue-100 transition max-w-sm mx-auto group">
-      <img src={member.img} className="w-full h-76 object-cover rounded-md" alt={member.name} />
-      <h3 className="text-2xl font-semibold mt-4">{member.name}</h3>
-      <p className="text-gray-600"><b>{member.post}</b></p>
-    </div>
-  ))}
+<div className="mt-10 max-w-3xl mx-auto">
+  <Swiper
+    modules={[Navigation, Pagination,Autoplay]}
+    spaceBetween={30}
+    slidesPerView={1}
+    pagination={{ clickable: true }}
+    navigation
+    autoplay={{
+      delay: 2000,
+      disableOnInteraction: false,
+    }}
+    breakpoints={{
+      768: { slidesPerView: 2 },
+    }}
+  >
+    {mainteam.map((member, index) => (
+      <SwiperSlide key={index}>
+        <div className="p-4 bg-white rounded-lg shadow text-center hover:bg-blue-100 transition max-w-sm mx-auto group">
+          <img src={member.img} className="w-full h-76 object-cover rounded-md" alt={member.name} />
+          <h3 className="text-2xl font-semibold mt-4">{member.name}</h3>
+          <p className="text-gray-600"><b>{member.post}</b></p>
+        </div>
+      </SwiperSlide>
+    ))}
+  </Swiper>
 </div>
 
+<div className="max-w-7xl mx-auto mt-16 text-center">
+  <h2 className="text-4xl mt-6 sm:text-4xl md:text-5xl font-bold text-gray-800 dark:text-white">
+    Meet Our Expert <br /> Doctors
+  </h2>
+  <p className="mt-6 text-lg sm:text-xl text-gray-600 dark:text-gray-300 ">
+    Our team of highly skilled professionals is dedicated to providing you with the
+    best dialysis care possible.
+  </p>
+</div>
 
-
-      <div className="max-w-7xl mx-auto mt-16 text-center">
-        <h2 className="text-4xl mt-6 sm:text-4xl md:text-5xl font-bold text-gray-800 dark:text-white">
-          Meet Our Expert <br /> Doctors
-        </h2>
-        <p className="mt-6 text-lg sm:text-xl text-gray-600 dark:text-gray-300 ">
-          Our team of highly skilled professionals is dedicated to providing you with the
-          best dialysis care possible.
-        </p>
-      </div>
-
-      <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-      <div  className="p-6 bg-white rounded-lg shadow text-center hover:bg-blue-100 transition max-w-sm mx-auto group">
-          <img src={doc1}  className="w-full h-76 object-cover rounded-md" />
-          <h3 className="text-2xl font-semibold mt-4">Mr. PANKAJ RAJPUT</h3>
-          <p className="text-gray-600"><b>Head of dialysis services</b><br/>Delhi - NCR region.</p>
-        </div>
+<div className="mt-12 max-w-5xl mx-auto">
+  <Swiper
+    modules={[Navigation, Pagination,Autoplay]}
+    spaceBetween={30}
+    slidesPerView={1}
+    pagination={{ clickable: true }}
+    navigation
+    autoplay={{
+      delay: 2000,
+      disableOnInteraction: false,
+    }}
+    breakpoints={{
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    }}
+  >
+    {[{
+      name: "Mr. PANKAJ RAJPUT",
+      desc: "Head of dialysis services\nDelhi - NCR region.",
+      img: doc1,
+    },
+    {
+      name: "Dr. RAJESH GOEL",
+      desc: "Nephrologist",
+      img: doc0,
+    },
+    {
+      name: "Mr. BANKE LAL BAGHEL",
+      desc: "Head of dialysis services\nMathura- Agra region",
+      img: doc1,
+    }].map((doc, i) => (
+      <SwiperSlide key={i}>
         <div className="p-6 bg-white rounded-lg shadow text-center hover:bg-blue-100 transition max-w-sm mx-auto group">
-          <img  src={doc0} className="w-full h-76 object-cover rounded-md" />
-          <h3 className="text-2xl font-semibold mt-4">Dr. RAJESH GOEL</h3>
-          <p className="text-gray-600">Nephrologist</p>
+          <img src={doc.img} className="w-full h-76 object-cover rounded-md" />
+          <h3 className="text-2xl font-semibold mt-4">{doc.name}</h3>
+          <p className="text-gray-600 whitespace-pre-line">{doc.desc}</p>
         </div>
-      
-        <div className="p-6 bg-white rounded-lg shadow text-center hover:bg-blue-100 transition max-w-sm mx-auto group">
-          <img src={doc1}  className="w-full h-76 object-cover rounded-md" />
-          <h3 className="text-2xl font-semibold mt-4">Mr. BANKE LAL BAGHEL</h3>
-          <p className="text-gray-600"><b>Head of dialysis services</b><br/> Mathura- Agra region</p>
-        </div>
-      </div>
+      </SwiperSlide>
+    ))}
+  </Swiper>
+</div>
+
     </div>
   );
 };

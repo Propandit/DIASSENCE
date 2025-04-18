@@ -67,21 +67,35 @@ export default function Footer() {
         <div>
           <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
           <p><strong>📞 Phone:</strong> +91 7017815684 </p>
-          <p><strong>📧 Email:</strong><a href="mailto:diassencehealthcare@gmail.com" className="text-gray-800 font-semibold hover:text-blue-700 ">   diassencehealthcare@gmail.com </a></p>
-          <p><strong>📍 Address:</strong>  <a href="https://maps.app.goo.gl/NYJUUvTSHsy7Q4uw5" 
-     target="_blank" 
-     rel="noopener noreferrer" 
-     className="text-gray-800 font-semibold hover:text-blue-700">
-    51, Manas Nagar Maholi Road, <center>Mathura-281001</center>
-  </a> </p>
-          <p><strong>🕒 Working Hours:</strong>  24/7 hrs Open </p>
-          <p><strong>⚙️Support:</strong>
+        
+        
+          {/* <p><strong>⚙️Support:</strong>
           <button onClick={() => navigate("/TechTeam")} className="mt-1 bg-blue-100 text-black px-2 hover:text-blue-700 ">
             Technical Support
       </button>
-          </p>
+          </p> */}
+          <p><strong>🕒 Working Hours:</strong>  24/7 hrs Open </p>
+          <p><strong>📧 Email:</strong><a href="mailto:diassencehealthcare@gmail.com" className="text-gray-800 font-semibold hover:text-blue-700 ">   diassencehealthcare@gmail.com </a></p>
+          <p><strong>📍 Address:</strong>  <a href="https://maps.app.goo.gl/NYJUUvTSHsy7Q4uw5" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    className="text-gray-800 font-semibold hover:text-blue-700">
+    51, Manas Nagar Maholi Road, <center>Mathura-281001, Uttar Pradesh</center>
+  </a> </p>
         </div>
       </div>
+      <div className="relative mt-8">
+  <div className="absolute bottom right-1">
+  <button
+  onClick={() => navigate("/TechTeam")}
+  className="bg-transparent text-white p-3 rounded-full shadow-lg hover:bg-pink-600 transition-all"
+  title="Technical Support"
+  >
+  ⚙️
+  </button>
+  </div>
+</div>
+
 
       {/* Copyright */}
       <div className="text-center mt-8 text-gray-600 px-6 align">
