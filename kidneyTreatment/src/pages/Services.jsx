@@ -63,7 +63,7 @@ const Services = () => {
   <img
     src={service.image}
     alt={service.title}
-    className="w-full h-48 object-contain rounded-xl transition-transform duration-500 transform hover:scale-110"
+    className="w-full h-48 object-contain rounded-xl transition-transform duration-500 transform "
   />
 </div>
 
@@ -87,7 +87,7 @@ const Services = () => {
       </div>
 
       <button onClick={() => navigate("/download")} className="mt-10 bg-blue-500 text-white py-3 px-8 rounded-lg text-lg hover:bg-blue-600 transition duration-300">
-        Book Your First Online Dialysis
+        Book Your First Dialysis Online
       </button>
        {/* Urology Services Section */}
        <div className="mt-16 text-center">

@@ -1,8 +1,10 @@
   import { useState } from "react";
+  
   // import axios from "axios";
   import { Mail, MapPin, Phone, Clock } from "lucide-react";
 
   export default function Contact() {
+    
 
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -205,7 +207,9 @@
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
               </div>
+            
           </div>
+          
         </div>
         
       </div>

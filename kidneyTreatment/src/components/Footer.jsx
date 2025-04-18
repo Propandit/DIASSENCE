@@ -1,5 +1,6 @@
 import logo from '/assets/logo.png';
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaFacebookF, FaWhatsapp, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 
 
@@ -13,7 +14,7 @@ const socialLinks = [
 
 
 export default function Footer() {
-
+  const navigate = useNavigate();
 
 
 
@@ -71,9 +72,14 @@ export default function Footer() {
      target="_blank" 
      rel="noopener noreferrer" 
      className="text-gray-800 font-semibold hover:text-blue-700">
-    51, Manas Nagar Maholi Road, Mathura-281001
+    51, Manas Nagar Maholi Road, <center>Mathura-281001</center>
   </a> </p>
           <p><strong>🕒 Working Hours:</strong>  24/7 hrs Open </p>
+          <p><strong>⚙️Support:</strong>
+          <button onClick={() => navigate("/TechTeam")} className="mt-1 bg-blue-100 text-black px-2 hover:text-blue-700 ">
+            Technical Support
+      </button>
+          </p>
         </div>
       </div>
 

@@ -1,10 +1,11 @@
 
 // import { MdStar, MdStarHalf } from "react-icons/md";
 import Slider from "react-slick";
-import  { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { FaUserMd, FaTags, FaVideo, FaHeartbeat } from "react-icons/fa";
 // import { MdOutlineStar } from "react-icons/md";
 import { SiBitrise } from "react-icons/si";
+import CountUp from "react-countup";
 // import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -21,6 +22,10 @@ import back from "/assets/bg1.jpg";
 // import mam from "/assets/mam.jpg";
 import Gallery from "./Gallery";
 // import {  FaClock } from "react-icons/fa";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import {  Autoplay } from "swiper/modules";
 
 
 
@@ -99,6 +104,127 @@ const services = [
 
 
 export default function Home() {
+
+
+  const [startCount, setStartCount] = useState(false);
+  const sectionRef = useRef(null);
+
+
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setStartCount(true);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+
+
+  const pricingPlans = [
+    {
+      title: "Single Lumen Catheter",
+      subtitle: "Dialysis Procedure",
+      price: "3000",
+      note: "Placement Charges",
+      features: ["Quick procedure", "Sterile technique", "Experienced staff"],
+      color: "from-cyan-500 to-blue-500",
+    },
+    {
+      title: "Double Lumen Catheter",
+      subtitle: "Dialysis Procedure",
+      price: "4500",
+      note: "Placement Charges",
+      features: ["Dual access", "Higher flow", "Preferred for long sessions"],
+      color: "from-cyan-500 to-blue-500",
+    },
+    {
+      title: "Kidney Biopsy",
+      subtitle: "Diagnostic Procedure",
+      price: "6500",
+      note: "Inclusive of lab charges",
+      features: ["Pathology review", "Ultrasound guided", "Painless experience"],
+      color: "from-cyan-500 to-blue-500",
+    },
+    {
+      title: "Intrajugular Catheter",
+      subtitle: "Dialysis Access",
+      price: "5000",
+      note: "Placement Charges",
+      features: ["Central vein access", "Minimally invasive", "Safe & secure"],
+      color: "from-cyan-500 to-blue-500",
+    },
+    {
+      title: "SLED Dialysis - 6hrs",
+      subtitle: "Dialysis Session",
+      price: "3500",
+      note: "Single session",
+      features: ["Slow, efficient dialysis", "Monitored care", "Comfortable setup"],
+      color: "from-cyan-500 to-blue-500",
+    },
+    {
+      title: "SLED Dialysis - 8hrs",
+      subtitle: "Extended Session",
+      price: "4000",
+      note: "Single session",
+      features: ["Longer treatment", "Night session available", "Personal monitoring"],
+      color: "from-cyan-500 to-blue-500",
+    },
+    {
+      title: "OPD - Single Use",
+      subtitle: "With Dialyser",
+      price: "2000",
+      note: "Outpatient Rate",
+      features: ["One-time use kit", "Sterile", "Safe & clean"],
+      color: "from-cyan-500 to-blue-500",
+    },
+    {
+      title: "OPD - Without Dialyser",
+      subtitle: "Single Use Session",
+      price: "1500",
+      note: "Outpatient Rate",
+      features: ["Bring your own dialyser", "Sterile lines", "Lower cost"],
+      color: "from-cyan-500 to-blue-500",
+    },
+    {
+      title: "OPD - Reuse Session",
+      subtitle: "Reuse + Reuse Bloodline",
+      price: "1000",
+      note: "Cost-efficient care",
+      features: ["Reusable dialyser", "Reusable lines", "Economical"],
+      color: "from-cyan-500 to-blue-500",
+    },
+    {
+      title: "OPD - Reuse + New Bloodline",
+      subtitle: "Reuse Session",
+      price: "1200",
+      note: "New tubing lines",
+      features: ["New bloodline", "Reuse dialyser", "Affordable safety"],
+      color: "from-cyan-500 to-blue-500",
+    },
+  ];
+  
+
+
+  const stats = [
+    { label: "Patient Satisfaction Rating", num: 99, suffix: "%", icon: <SiBitrise /> },
+    { label: "Services offered till date", num: 4000, suffix: "+", icon: <FaUserCheck /> },
+    { label: "Happy Clients", num: 500, suffix: "+", icon: <FaSmile /> },
+    { label: "Support Available", num: 24, suffix: "/7", icon: <FaStar /> },
+  ];
   const navigate = useNavigate();
 
   // const [beforeAfter, setBeforeAfter] = useState(50);
@@ -223,7 +349,7 @@ export default function Home() {
       
 {/*service party */}
 
-<section className="container mx-auto mt-24 mb-24 text-center px-4 sm:px-6 lg:px-8">
+<section className="container mx-auto mt-24 mb-18 text-center px-4 sm:px-6 lg:px-8">
   <div className="text-center mb-12">
     {/* Main Section Title */}
     <motion.h2 
@@ -274,54 +400,102 @@ export default function Home() {
 
   
   <div className="mt-10 text-center">
-    <Link to="/services" className="inline-block px-6 py-3 text-white bg-blue-600 rounded-lg shadow-md transition-all duration-300 hover:bg-blue-800">
+    <Link to="/services" className="inline-block px-7 py-3 text-white bg-blue-600 rounded-lg shadow-md transition-all duration-300 hover:bg-blue-800">
       View All Services →
     </Link>
   </div>
 </section>
 
+<section>
+<div className=" py-1 px-8 bg-gray-50 dark:bg-gray-900">
+      <h2 className="text-4xl font-bold text-center text-gray-800 dark:text-white mb-10">
+      Dialysis Procedures Pricing
+      </h2>
 
-<section className="container mx-auto mt-24 mb-24 text-center px-4 sm:px-6 lg:px-8">
-  {/* Heading with Underline */}
-  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 dark:text-white">
-    Our Achievements <br /> in <span className="text-blue-600">Numbers</span>
-  </h2>
-  <div className="w-24 h-1 bg-blue-500 mx-auto mt-2"></div> {/* Underline */}
-  <p className="mt-3 text-lg sm:text-xl text-gray-600 dark:text-gray-300">
-    Trusted by thousands of patients for their kidney care needs
-  </p>
-
-  {/* Achievement Cards */}
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-8">
-    {[
-      { label: " Patient Satisfaction Rating", num: "99%", icon: <SiBitrise  /> },
-      { label: " Services offered till date", num: "4000+", icon: <FaUserCheck /> },
-      { label: "Happy clients", num: "500+", icon: <FaSmile /> },
-      { label: "Support Available", num: "24*7", icon: <FaStar /> },
-    ].map((item, index) => (
-      <div
-        key={index}
-        className="p-6 sm:p-8 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:bg-blue-100 dark:hover:bg-gray-700 transition relative group text-center"
+      <Swiper
+        slidesPerView={1}
+        spaceBetween={30}
+        pagination={{ clickable: true }}    
+        breakpoints={{
+          640: { slidesPerView: 1.2 },
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+        }}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
+    loop={true}
+    modules={[Autoplay]}
       >
-        {/* Animated Icon */}
-        <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center text-white bg-blue-500 rounded-full text-2xl sm:text-3xl transition-transform group-hover:scale-110">
-          {item.icon}
-        </div>
-
-        {/* Number */}
-        <h3 className="text-3xl sm:text-4xl font-bold text-blue-600 mt-4">{item.num}</h3>
-
-        {/* Label */}
-        <p className="text-gray-600 dark:text-gray-300 text-md sm:text-lg mt-1">
-          {item.label}
-        </p>
-
-        {/* Animated Underline */}
-        <div className="w-12 sm:w-16 h-1 bg-blue-300 mt-2 mx-auto transition-all group-hover:w-full group-hover:bg-blue-600"></div>
-      </div>
-    ))}
-  </div>
+        {pricingPlans.map((plan, idx) => (
+          <SwiperSlide key={idx}>
+            <div
+              className={`relative bg-gradient-to-br bg-blue-500 text-white rounded-xl p-8 shadow-xl text-center transition transform hover:scale-105 rounded-lg`}
+            >
+              {plan.discount && (
+                <span className="absolute -top-3 -right-3 bg-white text-red-500 font-bold text-sm px-2 py-1 rounded-full shadow">
+                  {plan.discount}
+                </span>
+              )}
+              <h3 className="text-xl font-bold uppercase">{plan.title}</h3>
+              <p className="text-sm mt-1">{plan.subtitle}</p>
+              <div className="mt-6">
+                <span className="text-4xl font-bold">{plan.price}₹</span>
+                <span className="text-sm">/only</span>
+              </div>
+              <p className="text-sm mt-2">{plan.note}</p>
+              <ul className="mt-6 space-y-2 text-sm">
+                {plan.features.map((f, i) => (
+                  <li key={i}>✔ {f}</li>
+                ))}
+              </ul>
+              <button onClick={() => navigate("/download")}  className="mt-6 bg-white text-blue-600 font-semibold px-6 py-2 rounded-full hover:bg-gray-100 transition">
+                Select
+              </button>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
 </section>
+
+<section ref={sectionRef} className="container mx-auto mt-24 mb-24 text-center px-4 sm:px-6 lg:px-8">
+      {/* Heading with Underline */}
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 dark:text-white">
+        Our Achievements <br /> in <span className="text-blue-600">Numbers</span>
+      </h2>
+      <div className="w-24 h-1 bg-blue-500 mx-auto mt-2"></div> {/* Underline */}
+      <p className="mt-3 text-lg sm:text-xl text-gray-600 dark:text-gray-300">
+        Trusted by thousands of patients for their kidney care needs
+      </p>
+
+      {/* Achievement Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-8">
+        {stats.map((item, index) => (
+          <div
+            key={index}
+            className="p-6 sm:p-8 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:bg-blue-100 dark:hover:bg-gray-700 transition relative group text-center"
+          >
+            {/* Animated Icon */}
+            <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center text-white bg-blue-500 rounded-full text-2xl sm:text-3xl transition-transform group-hover:scale-110">
+              {item.icon}
+            </div>
+
+            {/* CountUp Number */}
+            <h3 className="text-3xl sm:text-4xl font-bold text-blue-600 mt-4">
+              {startCount ? <CountUp start={0} end={item.num} duration={1} /> : 0}
+              {item.suffix}
+            </h3>
+
+            {/* Label */}
+            <p className="text-gray-600 dark:text-gray-300 text-md sm:text-lg mt-1">
+              {item.label}
+            </p>
+
+            {/* Animated Underline */}
+            <div className="w-12 sm:w-16 h-1 bg-blue-300 mt-2 mx-auto transition-all group-hover:w-full group-hover:bg-blue-600"></div>
+          </div>
+        ))}
+      </div>
+    </section>
 
 
 
